@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Google fonts link -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Spline+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Bank Deposit </title>
+    <link rel="stylesheet" href="./style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+<div>
+    <div class="mt-20 text-center border-2 border-blue-200 p-5 w-2/4 mx-auto rounded-2xl">
+            <h1 class="text-7xl text-pink-500 font-medium">My <sapn class="text-cyan-700 text-5xl font-extrabold drop-shadow-xl">Bank</sapn></h1>
+    </div>
+
+    <main class="grid grid-cols-3 gap-4 w-9/12 mx-auto mt-24">
+        <div class="bg-teal-500 p-5 rounded-md">
+            <div>
+                <h1 class="text-white text-2xl font-semibold mb-3">Deposit</h1>
+                <h1 class="text-4xl text-orange-900 font-semibold">$<span id="depostiMoney">0</span></h1>
+            </div>
+        </div>
+        <div class="bg-green-800 p-5 rounded-md">
+            <div>
+                <h1 class="text-white text-2xl font-semibold mb-3">withdraw</h1>
+                <h1 class="text-4xl text-slate-900 font-semibold">$<span id="withdrowSet">0</span></h1>
+            </div>
+        </div>
+        <div class="bg-indigo-900 p-5 rounded-md">
+            <div>
+                <h1 class="text-white text-2xl font-semibold mb-3">Balance</h1>
+                <h1 class="text-4xl text-red-500 font-semibold">$<span id="totalbalace">200</span></h1>
+            </div>
+        </div>
+    </main>
+
+    <section class="grid grid-cols-2 gap-4 w-9/12 mx-auto mt-24 mb-12">
+        <div class="bg-indigo-600 p-5 rounded-md">
+            <div>
+                <h1 class="text-white text-2xl font-semibold mb-3">Deposit</h1>
+                <input id="deposit" type="number" placeholder="Deposit-money" class="h-10 rounded-md focus:outline-none focus:border-indigo-300 p-3 focus: border-2">
+                <button id="deposit-btn" class="bg-green-600 px-5 py-2 ml-4 text-white font-medium rounded-md transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-purple-700 duration-100 text-base">Submit</button>
+            </div>
+        </div>
+        <div class="bg-cyan-700 p-5 rounded-md">
+            <div>
+                <h1 class="text-white text-2xl font-semibold mb-3">withdraw</h1>
+                <input id="withdrow-input" type="number" placeholder="Deposit-money" class="h-10 rounded-md focus:outline-none focus:border-indigo-300 p-3 focus: border-2">
+                <button id="withdrow-btn" class="bg-pink-900 px-5 py-2 ml-4 text-white font-medium rounded-md transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-purple-700 duration-100 text-base">Submit</button>
+            </div>
+        </div>
+        
+    </section>
+</div>
+
+
+    <script>
+        document.getElementById('deposit-btn').addEventListener('click', function(){
+
+            const depositInput = document.getElementById('deposit');
+
+                const depositValue = depositInput.value;
+                const depostiValueConvartNumber = parseFloat(depositValue);
+                // console.log(depostiValueConvartNumber);
+                depositInput.value = "";
+                if(depostiValueConvartNumber < 0){
+                alert("something worng");
+                return;
+            }
+                const depositMoney = document.getElementById('depostiMoney');
+                const depositMoneyChack = depositMoney.innerText;
+                const depositMoneyConsvartNumber = parseFloat(depositMoneyChack);
+                    // console.log(depositMoneyConsvartNumber);
+                const number =  depostiValueConvartNumber + depositMoneyConsvartNumber;
+                depositMoney.innerText = number;
+
+                // Total balance
+                const totalBalance = document.getElementById('totalbalace');
+                const totalBalanceText = totalBalance.innerText;
+                const ConvartNumber = parseFloat(totalBalanceText);
+
+                const totalBalnceSet = depostiValueConvartNumber + ConvartNumber;
+                totalBalance.innerText = totalBalnceSet;
+
+        });
+
+        // Withdrow section js
+        document.getElementById('withdrow-btn').addEventListener('click', function(){
+            const inputId = document.getElementById('withdrow-input');
+            const inputValue = inputId.value;
+            const inputValueConvart = parseFloat(inputValue);
+            // console.log(inputValueConvart);
+            // set withdrow ammount
+            // Total balance
+            const totalBalance = document.getElementById('totalbalace');
+            const totalBalanceInertext = totalBalance.innerText;
+            const totalBalanceConvart = parseFloat(totalBalanceInertext);
+
+            if(inputValueConvart < 0){
+                alert("something worng");
+                return;
+            }else if(inputValueConvart > totalBalanceConvart){
+                alert("Apnar eto taka nai");
+                return;
+            }
+
+            const setMoneyWithdrow = document.getElementById('withdrowSet');
+            const getInerText = setMoneyWithdrow.innerText;
+            const convartNumber = parseFloat(getInerText);
+            // console.log(convartNumber);
+
+            const calculateTotal = inputValueConvart + convartNumber;
+            setMoneyWithdrow.innerText = calculateTotal;
+
+            
+            
+            const setWithdrow = totalBalanceConvart - inputValueConvart;
+            totalBalance.innerText = setWithdrow;
+            
+        });
+    </script>
+
+
+    <script src="./index.js"></script>
+    <script src="./tailwind.js"></script>
+</body>
+</html>
