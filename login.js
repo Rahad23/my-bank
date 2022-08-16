@@ -16,5 +16,3 @@ myEmail.value = "";
 myPassword.value = "";
 });
 
-
-
